@@ -893,6 +893,16 @@ Nix packages for AI coding agents and development tools. Automatically updated d
 
 </details>
 <details>
+<summary><strong>kiri</strong> - Intelligent code context extraction for LLMs via Model Context Protocol</summary>
+
+- **Source**: source
+- **License**: MIT
+- **Homepage**: https://github.com/CAPHTECH/kiri
+- **Usage**: `nix run github:numtide/llm-agents.nix#kiri -- --help`
+- **Nix**: [packages/kiri/package.nix](packages/kiri/package.nix)
+
+</details>
+<details>
 <summary><strong>mcporter</strong> - TypeScript runtime and CLI for the Model Context Protocol</summary>
 
 - **Source**: source
@@ -1008,29 +1018,9 @@ Add to your system configuration:
 }
 ```
 
-> [!NOTE]
-> This flake is only built and tested against its pinned `nixpkgs-unstable`
-> input. If you set `llm-agents.inputs.nixpkgs.follows = "nixpkgs"`, your
-> `nixpkgs` must also track `nixpkgs-unstable` and be reasonably current —
-> using a stable release branch (e.g. `nixos-25.05`) **will** break eventually.
-> Omitting `follows` costs you a second nixpkgs evaluation but guarantees you
-> get the combination we ship in CI — and lets you pull pre-built binaries
-> from our [binary cache](#binary-cache) instead of rebuilding everything
-> against your nixpkgs.
-
 ### Using Overlay
 
-Alternatively, use an overlay to access packages under the `llm-agents`
-namespace. Two are provided:
-
-- `overlays.default` exposes `packages.${system}` as-is. Packages are built
-  against this flake's pinned nixpkgs, so the [binary cache](#binary-cache)
-  hits regardless of your nixpkgs revision, at the cost of evaluating a second
-  nixpkgs instance.
-- `overlays.shared-nixpkgs` rebuilds each package against **your** nixpkgs, so
-  dependencies are shared with the rest of your system and no extra nixpkgs is
-  evaluated. The binary cache will only hit when your nixpkgs revision matches
-  ours.
+Alternatively, use the overlay to access packages under the `llm-agents` namespace:
 
 ```nix
 {
@@ -1058,22 +1048,19 @@ namespace. Two are provided:
 
 ### Try Without Installing
 
-Browse all available tools with the interactive launcher:
-
 ```bash
-nix run github:numtide/llm-agents.nix
-```
-
-This opens an fzf picker listing every package with its description.
-Select one and it will be run via `nix run`.
-
-Or run a specific tool directly:
-
-```bash
+# Try Claude Code
 nix run github:numtide/llm-agents.nix#claude-code
+
+# Try OpenCode
 nix run github:numtide/llm-agents.nix#opencode
+
+# Try Gemini CLI
 nix run github:numtide/llm-agents.nix#gemini-cli
+
+# Try Qwen Code
 nix run github:numtide/llm-agents.nix#qwen-code
+
 # etc...
 ```
 
@@ -1165,9 +1152,7 @@ Contributions are welcome! Please:
 
 ## See also
 
-- [natsukium/mcp-servers-nix](https://github.com/natsukium/mcp-servers-nix) - Nix packages for MCP (Model Context Protocol) servers
-- [aaddrick/claude-desktop-debian](https://github.com/aaddrick/claude-desktop-debian?tab=readme-ov-file#using-nix-flake-nixos) - Claude Desktop for Linux
-- [nothingnesses/agent-images](https://github.com/nothingnesses/agent-images) - Sandboxed OCI container images for AI coding agents
+- https://github.com/k3d3/claude-desktop-linux-flake
 
 ## License
 
