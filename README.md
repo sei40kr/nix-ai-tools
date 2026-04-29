@@ -893,7 +893,7 @@ Nix packages for AI coding agents and development tools. Automatically updated d
 
 </details>
 <details>
-<summary><strong>kiri</strong> - Intelligent code context extraction for LLMs via Model Context Protocol</summary>
+<summary><strong>kiri</strong> - Intelligent code context extraction for LLMs via MCP (test up-to-date)</summary>
 
 - **Source**: source
 - **License**: MIT

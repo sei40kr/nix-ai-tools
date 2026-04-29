@@ -59,7 +59,7 @@ buildNpmPackage {
   passthru.category = "Utilities";
 
   meta = {
-    description = "Intelligent code context extraction for LLMs via Model Context Protocol";
+    description = "Intelligent code context extraction for LLMs via MCP (test up-to-date)";
     homepage = "https://github.com/CAPHTECH/kiri";
     changelog = "https://github.com/CAPHTECH/kiri/blob/v${version}/CHANGELOG.md";
     license = lib.licenses.mit;
