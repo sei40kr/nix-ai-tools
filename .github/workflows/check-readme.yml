@@ -1,0 +1,23 @@
+name: Check README
+on:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  check-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            extra-substituters = https://cache.numtide.com
+            extra-trusted-public-keys = niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=
+      - name: Regenerate README
+        run: ./scripts/generate-package-docs.py
+      - name: Verify README is up to date
+        run: |
+          if ! git diff --exit-code README.md; then
+            echo "::error::README.md is out of date. Run ./scripts/generate-package-docs.py and commit the result." >&2
+            exit 1
+          fi
